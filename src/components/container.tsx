@@ -9,7 +9,7 @@ function Container() {
 	useEffect(() => {
 		if (!search) return;
 		fetch(
-			`https://books.googleapis.com/books/v1/volumes?q=${search}&maxResults=3&key=${process.env.REACT_APP_API_KEY}`,
+			`https://books.googleapis.com/books/v1/volumes?q=${search}&maxResults=30&key=${process.env.REACT_APP_API_KEY}`,
 			{
 				method: 'GET',
 				headers: { 'Content-Type': 'application/json' }
@@ -20,13 +20,14 @@ function Container() {
 				return res.json();
 			})
 			.then(data => {
+				console.log(data);
 				setList(
 					data.items.map(item => [
-						item.volumeInfo.title,
-						item.volumeInfo.categories?.[0],
-						item.volumeInfo.authors?.[0],
-						item.volumeInfo.description,
-						item.volumeInfo.imageLinks.smallThumbnail
+						item.volumeInfo?.imageLinks?.smallThumbnail,
+						item.volumeInfo?.title,
+						item.volumeInfo?.categories?.[0],
+						item.volumeInfo?.authors?.[0],
+						item.volumeInfo?.description
 					])
 				);
 			});
