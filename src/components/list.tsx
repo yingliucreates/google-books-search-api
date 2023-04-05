@@ -3,6 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
+import TableHead from '@mui/material/TableHead';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableFooter from '@mui/material/TableFooter';
@@ -85,8 +86,30 @@ function TablePaginationActions({ count, page, rowsPerPage, onPageChange }) {
 	);
 }
 
+const columns = [
+	{ id: 'thumbnail', label: 'Image', minWidth: 100, align: 'left' },
+	{ id: 'title', label: 'Title', minWidth: 100, align: 'left' },
+	{
+		id: 'category',
+		label: 'Category',
+		minWidth: 100,
+		align: 'left'
+	},
+	{
+		id: 'author',
+		label: 'Author(s)',
+		minWidth: 200,
+		align: 'left'
+	},
+	{
+		id: 'desc',
+		label: 'Description',
+		minWidth: 300,
+		align: 'left'
+	}
+];
+
 const List = ({ lists }) => {
-	console.log(lists.length);
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -108,7 +131,22 @@ const List = ({ lists }) => {
 			))} */}
 
 			<TableContainer component={Paper}>
-				<Table sx={{ minWidth: 100 }} aria-label="custom pagination table">
+				<Table sx={{ minWidth: 100 }} stickyHeader aria-label="sticky table">
+					{lists.length ? (
+						<TableHead>
+							<TableRow>
+								{columns.map(column => (
+									<TableCell
+										key={column.id}
+										text-align={column.align}
+										style={{ minWidth: column.minWidth }}
+									>
+										{column.label}
+									</TableCell>
+								))}
+							</TableRow>
+						</TableHead>
+					) : null}
 					<TableBody>
 						{(rowsPerPage > 0
 							? lists.slice(
@@ -117,7 +155,7 @@ const List = ({ lists }) => {
 							  )
 							: lists
 						).map((list, i) => (
-							<TableRow key={i}>
+							<TableRow hover key={i}>
 								<TableCell component="th" scope="row" style={{ width: '10%' }}>
 									<ImageListItem
 										sx={{ width: 80, height: 80, align: 'right' }}
@@ -146,31 +184,33 @@ const List = ({ lists }) => {
 							</TableRow>
 						))}
 						{emptyRows > 0 && (
-							<TableRow style={{ height: 53 * emptyRows }}>
+							<TableRow hover style={{ height: 53 * emptyRows }}>
 								<TableCell colSpan={6} />
 							</TableRow>
 						)}
 					</TableBody>
-					<TableFooter>
-						<TableRow>
-							<TablePagination
-								rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-								colSpan={3}
-								count={lists.length}
-								rowsPerPage={rowsPerPage}
-								page={page}
-								SelectProps={{
-									inputProps: {
-										'aria-label': 'rows per page'
-									},
-									native: true
-								}}
-								onPageChange={handleChangePage}
-								onRowsPerPageChange={handleChangeRowsPerPage}
-								ActionsComponent={TablePaginationActions}
-							/>
-						</TableRow>
-					</TableFooter>
+					{lists.length ? (
+						<TableFooter>
+							<TableRow>
+								<TablePagination
+									rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+									colSpan={5}
+									count={lists.length}
+									rowsPerPage={rowsPerPage}
+									page={page}
+									SelectProps={{
+										inputProps: {
+											'aria-label': 'rows per page'
+										},
+										native: true
+									}}
+									onPageChange={handleChangePage}
+									onRowsPerPageChange={handleChangeRowsPerPage}
+									ActionsComponent={TablePaginationActions}
+								/>
+							</TableRow>
+						</TableFooter>
+					) : null}
 				</Table>
 			</TableContainer>
 		</div>
