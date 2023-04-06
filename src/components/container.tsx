@@ -6,9 +6,11 @@ import Form from '../components/form';
 function Container() {
 	const [list, setList] = useState([]);
 	const [search, setSearch] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		if (!search) return;
+		setIsLoading(true);
 		fetch(
 			`https://books.googleapis.com/books/v1/volumes?q=${search}&maxResults=30&key=${process.env.REACT_APP_API_KEY}`,
 			{
@@ -22,6 +24,7 @@ function Container() {
 			})
 			.then(data => {
 				console.log(data);
+				setIsLoading(false);
 				setList(
 					data.items.map(item => [
 						item.volumeInfo?.imageLinks?.smallThumbnail,
@@ -37,7 +40,7 @@ function Container() {
 
 	return (
 		<Box>
-			<Form onSubmit={value => setSearch(value)}></Form>
+			<Form onSubmit={value => setSearch(value)} isLoading={isLoading}></Form>
 			<List lists={list}></List>
 		</Box>
 	);
