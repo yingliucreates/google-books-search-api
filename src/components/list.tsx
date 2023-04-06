@@ -87,24 +87,30 @@ function TablePaginationActions({ count, page, rowsPerPage, onPageChange }) {
 }
 
 const columns = [
-	{ id: 'thumbnail', label: 'Image', minWidth: 100, align: 'left' },
-	{ id: 'title', label: 'Title', minWidth: 100, align: 'left' },
-	{
-		id: 'category',
-		label: 'Category',
-		minWidth: 100,
-		align: 'left'
-	},
+	{ id: 'thumbnail', label: 'IMAGE', minWidth: 100, align: 'left' },
+	{ id: 'title', label: 'TITLE', minWidth: 100, align: 'left' },
 	{
 		id: 'author',
-		label: 'Author(s)',
+		label: 'AUTHOR(S)',
 		minWidth: 200,
 		align: 'left'
 	},
 	{
+		id: 'category',
+		label: 'CATEGORY',
+		minWidth: 100,
+		align: 'left'
+	},
+	{
+		id: 'country',
+		label: 'COUNTRY',
+		minWidth: 50,
+		align: 'left'
+	},
+	{
 		id: 'desc',
-		label: 'Description',
-		minWidth: 300,
+		label: 'DESCRIPTION',
+		minWidth: 250,
 		align: 'left'
 	}
 ];
@@ -126,14 +132,10 @@ const List = ({ lists }) => {
 	};
 	return (
 		<div>
-			{/* {lists.map((l, i) => (
-				<li key={i}>{l}</li>
-			))} */}
-
-			<TableContainer component={Paper}>
+			<TableContainer component={Paper} elevation={8}>
 				<Table sx={{ minWidth: 100 }} stickyHeader aria-label="sticky table">
 					{lists.length ? (
-						<TableHead>
+						<TableHead component={Paper} elevation={3}>
 							<TableRow>
 								{columns.map(column => (
 									<TableCell
@@ -155,7 +157,7 @@ const List = ({ lists }) => {
 							  )
 							: lists
 						).map((list, i) => (
-							<TableRow hover key={i}>
+							<TableRow hover key={i} component={Paper} elevation={3}>
 								<TableCell component="th" scope="row" style={{ width: '10%' }}>
 									<ImageListItem
 										sx={{ width: 80, height: 80, align: 'right' }}
@@ -175,11 +177,14 @@ const List = ({ lists }) => {
 								<TableCell style={{ width: '10%' }} align="left">
 									{list[2]}
 								</TableCell>
-								<TableCell style={{ width: '20%' }} align="left">
+								<TableCell style={{ width: '15%' }} align="left">
 									{list[3]}
 								</TableCell>
-								<TableCell style={{ width: '40%' }} align="left">
+								<TableCell style={{ width: '10%' }} align="left">
 									{list[4]}
+								</TableCell>
+								<TableCell style={{ width: '35%' }} align="left">
+									{list[5]}
 								</TableCell>
 							</TableRow>
 						))}
