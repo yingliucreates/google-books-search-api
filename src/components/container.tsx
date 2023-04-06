@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Box from '@mui/material/Box';
 import List from '../components/list';
 import Form from '../components/form';
 
@@ -25,19 +26,20 @@ function Container() {
 					data.items.map(item => [
 						item.volumeInfo?.imageLinks?.smallThumbnail,
 						item.volumeInfo?.title,
+						item.volumeInfo?.authors,
 						item.volumeInfo?.categories?.[0],
-						item.volumeInfo?.authors?.[0],
-						item.volumeInfo?.description
+						item.saleInfo?.country,
+						item.searchInfo?.textSnippet
 					])
 				);
 			});
 	}, [search]);
 
 	return (
-		<div>
+		<Box>
 			<Form onSubmit={value => setSearch(value)}></Form>
 			<List lists={list}></List>
-		</div>
+		</Box>
 	);
 }
 
