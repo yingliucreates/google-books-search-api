@@ -131,94 +131,93 @@ const List = ({ lists }) => {
 		setPage(0);
 	};
 	return (
-		<div>
-			<TableContainer component={Paper} elevation={8}>
-				<Table sx={{ minWidth: 100 }} stickyHeader aria-label="sticky table">
-					{lists.length ? (
-						<TableHead component={Paper} elevation={3}>
-							<TableRow>
-								{columns.map(column => (
-									<TableCell
-										key={column.id}
-										text-align={column.align}
-										style={{ minWidth: column.minWidth }}
-									>
-										{column.label}
-									</TableCell>
-								))}
-							</TableRow>
-						</TableHead>
-					) : null}
-					<TableBody>
-						{(rowsPerPage > 0
-							? lists.slice(
-									page * rowsPerPage,
-									page * rowsPerPage + rowsPerPage
-							  )
-							: lists
-						).map((list, i) => (
-							<TableRow hover key={i} component={Paper} elevation={3}>
-								<TableCell component="th" scope="row" style={{ width: '10%' }}>
-									<ImageListItem
-										sx={{ width: 80, height: 80, align: 'right' }}
-										key={i}
-									>
-										<img
-											src={`${list[0]}?w=164&h=164&fit=crop&auto=format`}
-											srcSet={`${list[0]}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-											alt={list[1]}
-											loading="lazy"
-										/>
-									</ImageListItem>
+		<TableContainer component={Paper}>
+			<Table
+				sx={{ minWidth: 100, overflowY: 'auto', fontFamily: 'roboto' }}
+				stickyHeader
+				aria-label="sticky table"
+			>
+				{lists.length ? (
+					<TableHead component={Paper}>
+						<TableRow>
+							{columns.map(column => (
+								<TableCell
+									key={column.id}
+									text-align={column.align}
+									style={{ minWidth: column.minWidth }}
+								>
+									{column.label}
 								</TableCell>
-								<TableCell style={{ width: '20%' }} align="left">
-									{list[1]}
-								</TableCell>
-								<TableCell style={{ width: '10%' }} align="left">
-									{list[2]}
-								</TableCell>
-								<TableCell style={{ width: '15%' }} align="left">
-									{list[3]}
-								</TableCell>
-								<TableCell style={{ width: '10%' }} align="left">
-									{list[4]}
-								</TableCell>
-								<TableCell style={{ width: '35%' }} align="left">
-									{list[5]}
-								</TableCell>
-							</TableRow>
-						))}
-						{emptyRows > 0 && (
-							<TableRow hover style={{ height: 53 * emptyRows }}>
-								<TableCell colSpan={6} />
-							</TableRow>
-						)}
-					</TableBody>
-					{lists.length ? (
-						<TableFooter>
-							<TableRow>
-								<TablePagination
-									rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-									colSpan={5}
-									count={lists.length}
-									rowsPerPage={rowsPerPage}
-									page={page}
-									SelectProps={{
-										inputProps: {
-											'aria-label': 'rows per page'
-										},
-										native: true
-									}}
-									onPageChange={handleChangePage}
-									onRowsPerPageChange={handleChangeRowsPerPage}
-									ActionsComponent={TablePaginationActions}
-								/>
-							</TableRow>
-						</TableFooter>
-					) : null}
-				</Table>
-			</TableContainer>
-		</div>
+							))}
+						</TableRow>
+					</TableHead>
+				) : null}
+				<TableBody>
+					{(rowsPerPage > 0
+						? lists.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+						: lists
+					).map((list, i) => (
+						<TableRow hover key={i} component={Paper}>
+							<TableCell component="th" scope="row" style={{ width: '10%' }}>
+								<ImageListItem
+									sx={{ width: 80, height: 80, align: 'right' }}
+									key={i}
+								>
+									<img
+										src={`${list[0]}?w=164&h=164&fit=crop&auto=format`}
+										srcSet={`${list[0]}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+										alt={list[1]}
+										loading="lazy"
+									/>
+								</ImageListItem>
+							</TableCell>
+							<TableCell style={{ width: '20%' }} align="left">
+								{list[1]}
+							</TableCell>
+							<TableCell style={{ width: '10%' }} align="left">
+								{list[2]}
+							</TableCell>
+							<TableCell style={{ width: '15%' }} align="left">
+								{list[3]}
+							</TableCell>
+							<TableCell style={{ width: '10%' }} align="left">
+								{list[4]}
+							</TableCell>
+							<TableCell style={{ width: '35%' }} align="left">
+								{list[5]}
+							</TableCell>
+						</TableRow>
+					))}
+					{emptyRows > 0 && (
+						<TableRow hover style={{ height: 53 * emptyRows }}>
+							<TableCell colSpan={6} />
+						</TableRow>
+					)}
+				</TableBody>
+				{lists.length ? (
+					<TableFooter>
+						<TableRow>
+							<TablePagination
+								rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+								colSpan={5}
+								count={lists.length}
+								rowsPerPage={rowsPerPage}
+								page={page}
+								SelectProps={{
+									inputProps: {
+										'aria-label': 'rows per page'
+									},
+									native: true
+								}}
+								onPageChange={handleChangePage}
+								onRowsPerPageChange={handleChangeRowsPerPage}
+								ActionsComponent={TablePaginationActions}
+							/>
+						</TableRow>
+					</TableFooter>
+				) : null}
+			</Table>
+		</TableContainer>
 	);
 };
 export default List;

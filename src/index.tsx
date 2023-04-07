@@ -1,9 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { StyledEngineProvider } from '@mui/material/styles';
+import {
+	StyledEngineProvider,
+	ThemeProvider,
+	createTheme
+} from '@mui/material/styles';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+
+const theme = createTheme({
+	typography: {
+		fontFamily: [
+			'-apple-system',
+			'BlinkMacSystemFont',
+			'"Segoe UI"',
+			'Roboto',
+			'"Helvetica Neue"',
+			'Arial',
+			'sans-serif',
+			'"Apple Color Emoji"',
+			'"Segoe UI Emoji"',
+			'"Segoe UI Symbol"'
+		].join(','),
+		h1: {
+			fontWeight: 100,
+			fontSize: '80px',
+			paddingBottom: '30px'
+		}
+	}
+});
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -11,7 +37,9 @@ const root = ReactDOM.createRoot(
 root.render(
 	<React.StrictMode>
 		<StyledEngineProvider injectFirst>
-			<App />
+			<ThemeProvider theme={theme}>
+				<App />
+			</ThemeProvider>
 		</StyledEngineProvider>
 	</React.StrictMode>
 );
