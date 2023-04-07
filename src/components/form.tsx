@@ -4,16 +4,25 @@ import LoadingButton from '@mui/lab/LoadingButton';
 
 const Form = ({ onSubmit, isLoading }) => {
 	const [value, setValue] = useState('');
+	const debounce = (func, delay) => {
+		let timeoutId;
+		return (...args) => {
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(() => {
+				func.apply(this, args);
+			}, delay);
+		};
+	};
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		console.log(value);
+		onSubmit(value);
+		setValue('');
+	};
 
 	return (
-		<FormControl
-			sx={{ width: '100%' }}
-			onSubmit={e => {
-				e.preventDefault();
-				onSubmit(value);
-				setValue('');
-			}}
-		>
+		<FormControl sx={{ width: '100%' }} onSubmit={debounce(handleSubmit, 300)}>
 			<TextField
 				id="standard-basic"
 				label="Type in Your Keywords and..."
