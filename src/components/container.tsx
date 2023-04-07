@@ -39,7 +39,7 @@ function Container() {
 	}, [search]);
 
 	return (
-		<Box>
+		<Box sx={{ width: '1200px' }}>
 			<Form onSubmit={value => setSearch(value)} isLoading={isLoading}></Form>
 			<List lists={list}></List>
 		</Box>
