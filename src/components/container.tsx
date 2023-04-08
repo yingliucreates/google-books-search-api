@@ -7,7 +7,6 @@ function Container() {
 	const [list, setList] = useState([]);
 	const [search, setSearch] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
-
 	useEffect(() => {
 		if (!search) return;
 		setIsLoading(true);
@@ -31,7 +30,8 @@ function Container() {
 						item.volumeInfo?.title,
 						item.volumeInfo?.authors,
 						item.volumeInfo?.categories?.[0],
-						item.saleInfo?.country,
+						item.volumeInfo?.publishedDate,
+						item.volumeInfo?.publisher,
 						item.searchInfo?.textSnippet
 					])
 				);

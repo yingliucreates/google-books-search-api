@@ -16,6 +16,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { ImageListItem } from '@mui/material';
+import ArrowTooltip from './tooltip';
 
 function TablePaginationActions({ count, page, rowsPerPage, onPageChange }) {
 	const theme = useTheme();
@@ -87,31 +88,31 @@ function TablePaginationActions({ count, page, rowsPerPage, onPageChange }) {
 }
 
 const columns = [
-	{ id: 'thumbnail', label: 'IMAGE', minWidth: 100, align: 'left' },
+	{ id: 'thumbnail', label: 'IMAGE', minWidth: 50, align: 'left' },
 	{ id: 'title', label: 'TITLE', minWidth: 100, align: 'left' },
 	{
 		id: 'author',
 		label: 'AUTHOR(S)',
-		minWidth: 200,
+		minWidth: 100,
 		align: 'left'
 	},
 	{
 		id: 'category',
 		label: 'CATEGORY',
 		minWidth: 100,
-		align: 'left'
+		align: 'right'
 	},
 	{
-		id: 'country',
-		label: 'COUNTRY',
-		minWidth: 50,
-		align: 'left'
+		id: 'publishedDate',
+		label: 'PUBLISHED DATE',
+		minWidth: 100,
+		align: 'right'
 	},
 	{
-		id: 'desc',
-		label: 'DESCRIPTION',
-		minWidth: 250,
-		align: 'left'
+		id: 'publisher',
+		label: 'PUBLISHER',
+		minWidth: 100,
+		align: 'right'
 	}
 ];
 
@@ -157,36 +158,38 @@ const List = ({ lists }) => {
 						? lists.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 						: lists
 					).map((list, i) => (
-						<TableRow hover key={i} component={Paper}>
-							<TableCell component="th" scope="row" style={{ width: '10%' }}>
-								<ImageListItem
-									sx={{ width: 80, height: 80, align: 'right' }}
-									key={i}
-								>
-									<img
-										src={`${list[0]}?w=164&h=164&fit=crop&auto=format`}
-										srcSet={`${list[0]}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-										alt={list[1]}
-										loading="lazy"
-									/>
-								</ImageListItem>
-							</TableCell>
-							<TableCell style={{ width: '20%' }} align="left">
-								{list[1]}
-							</TableCell>
-							<TableCell style={{ width: '10%' }} align="left">
-								{list[2]}
-							</TableCell>
-							<TableCell style={{ width: '15%' }} align="left">
-								{list[3]}
-							</TableCell>
-							<TableCell style={{ width: '10%' }} align="left">
-								{list[4]}
-							</TableCell>
-							<TableCell style={{ width: '35%' }} align="left">
-								{list[5]}
-							</TableCell>
-						</TableRow>
+						<ArrowTooltip content={list[6]}>
+							<TableRow hover key={i} component={Paper}>
+								<TableCell component="th" scope="row" style={{ width: '10%' }}>
+									<ImageListItem
+										sx={{ width: 80, height: 80, align: 'right' }}
+										key={i}
+									>
+										<img
+											src={`${list[0]}?w=164&h=164&fit=crop&auto=format`}
+											srcSet={`${list[0]}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+											alt={list[1]}
+											loading="lazy"
+										/>
+									</ImageListItem>
+								</TableCell>
+								<TableCell style={{ width: '20%' }} align="left">
+									{list[1]}
+								</TableCell>
+								<TableCell style={{ width: '15%' }} align="left">
+									{list[2]}
+								</TableCell>
+								<TableCell style={{ width: '15%' }} align="left">
+									{list[3]}
+								</TableCell>
+								<TableCell style={{ width: '15%' }} align="left">
+									{list[4]}
+								</TableCell>
+								<TableCell style={{ width: '25%' }} align="left">
+									{list[5]}
+								</TableCell>
+							</TableRow>
+						</ArrowTooltip>
 					))}
 					{emptyRows > 0 && (
 						<TableRow hover style={{ height: 53 * emptyRows }}>

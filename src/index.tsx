@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import {
 	StyledEngineProvider,
 	ThemeProvider,
@@ -12,6 +11,7 @@ import reportWebVitals from './reportWebVitals';
 const theme = createTheme({
 	typography: {
 		fontFamily: [
+			'Noto Serif JP',
 			'-apple-system',
 			'BlinkMacSystemFont',
 			'"Segoe UI"',

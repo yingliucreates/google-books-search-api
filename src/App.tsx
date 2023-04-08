@@ -1,6 +1,5 @@
 import React from 'react';
 import Container from './components/container';
-import './App.css';
 import { Box, Typography } from '@mui/material';
 
 function App() {
@@ -10,7 +9,7 @@ function App() {
 				paddingTop: '50px',
 				paddingBottom: '50px',
 				paddingLeft: '80px',
-				paddingRight: '8opx',
+				paddingRight: '80px',
 				display: 'flex',
 				flexDirection: 'column',
 				alignItems: 'center'
