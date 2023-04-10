@@ -5,6 +5,7 @@ import { Box, Typography } from '@mui/material';
 function App() {
 	return (
 		<Box
+			data-testid="app-container"
 			sx={{
 				paddingTop: '50px',
 				paddingBottom: '50px',
@@ -15,7 +16,9 @@ function App() {
 				alignItems: 'center'
 			}}
 		>
-			<Typography variant="h1">🔦 Google Books Search 📚</Typography>
+			<Typography data-testid="typography-title" variant="h1">
+				🔦 Google Books Search 📚
+			</Typography>
 			<Container />
 		</Box>
 	);

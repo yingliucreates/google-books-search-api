@@ -16,6 +16,6 @@
 		"noEmit": true,
 		"jsx": "react-jsx"
 	},
-	"include": ["src", "**/*.ts", "**/*.tsx"],
+	"include": ["src", "**/*.ts", "**/*.tsx", "**/*.test.tsx"],
 	"exclude": ["node_modules"]
 }

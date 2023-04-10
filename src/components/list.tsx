@@ -131,35 +131,34 @@ const List = ({ lists }) => {
 		setRowsPerPage(parseInt(e.target.value, 10));
 		setPage(0);
 	};
-	return (
+	return lists.length ? (
 		<TableContainer component={Paper}>
 			<Table
 				sx={{ minWidth: 100, overflowY: 'auto', fontFamily: 'roboto' }}
 				stickyHeader
 				aria-label="sticky table"
+				data-testid="table"
 			>
-				{lists.length ? (
-					<TableHead component={Paper}>
-						<TableRow>
-							{columns.map(column => (
-								<TableCell
-									key={column.id}
-									text-align={column.align}
-									style={{ minWidth: column.minWidth }}
-								>
-									{column.label}
-								</TableCell>
-							))}
-						</TableRow>
-					</TableHead>
-				) : null}
-				<TableBody>
+				<TableHead data-testid="th">
+					<TableRow>
+						{columns.map(column => (
+							<TableCell
+								key={column.id}
+								text-align={column.align}
+								style={{ minWidth: column.minWidth }}
+							>
+								{column.label}
+							</TableCell>
+						))}
+					</TableRow>
+				</TableHead>
+				<TableBody data-testid="tb">
 					{(rowsPerPage > 0
 						? lists.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 						: lists
 					).map((list, i) => (
-						<ArrowTooltip content={list[6]}>
-							<TableRow hover key={i} component={Paper}>
+						<ArrowTooltip key={`tooltip${i}`} content={list[6]}>
+							<TableRow hover key={`tableRow${i}`} component={Paper}>
 								<TableCell component="th" scope="row" style={{ width: '10%' }}>
 									<ImageListItem
 										sx={{ width: 80, height: 80, align: 'right' }}
@@ -197,30 +196,28 @@ const List = ({ lists }) => {
 						</TableRow>
 					)}
 				</TableBody>
-				{lists.length ? (
-					<TableFooter>
-						<TableRow>
-							<TablePagination
-								rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-								colSpan={5}
-								count={lists.length}
-								rowsPerPage={rowsPerPage}
-								page={page}
-								SelectProps={{
-									inputProps: {
-										'aria-label': 'rows per page'
-									},
-									native: true
-								}}
-								onPageChange={handleChangePage}
-								onRowsPerPageChange={handleChangeRowsPerPage}
-								ActionsComponent={TablePaginationActions}
-							/>
-						</TableRow>
-					</TableFooter>
-				) : null}
+				<TableFooter>
+					<TableRow>
+						<TablePagination
+							rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+							colSpan={5}
+							count={lists.length}
+							rowsPerPage={rowsPerPage}
+							page={page}
+							SelectProps={{
+								inputProps: {
+									'aria-label': 'rows per page'
+								},
+								native: true
+							}}
+							onPageChange={handleChangePage}
+							onRowsPerPageChange={handleChangeRowsPerPage}
+							ActionsComponent={TablePaginationActions}
+						/>
+					</TableRow>
+				</TableFooter>
 			</Table>
 		</TableContainer>
-	);
+	) : null;
 };
 export default List;
