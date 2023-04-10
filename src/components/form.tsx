@@ -45,7 +45,6 @@ const Form = ({ onSubmit, isLoading }) => {
 	};
 
 	const handleChange = e => {
-		e.preventDefault();
 		setValue(e.target.value);
 	};
 
