@@ -25,7 +25,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"build": "react-scripts build",
-		"test": "react-scripts test",
+		"test": "react-scripts test --verbose",
 		"eject": "react-scripts eject"
 	},
 	"eslintConfig": {
@@ -48,6 +48,7 @@
 	},
 	"devDependencies": {
 		"dotenv": "^16.0.3",
+		"msw": "^1.2.1",
 		"swr": "^2.1.1"
 	}
 }

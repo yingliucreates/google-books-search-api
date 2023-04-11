@@ -56,6 +56,7 @@ const Form = ({ onSubmit, isLoading }) => {
 			<form onSubmit={handleSubmit}>
 				<TextField
 					id="standard-basic"
+					data-testid="text-input"
 					label="Type your query and..."
 					variant="standard"
 					size="small"
