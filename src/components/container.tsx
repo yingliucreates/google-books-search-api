@@ -22,11 +22,13 @@ function Container() {
 				return res.json();
 			})
 			.then(data => {
-				console.log(data);
+				// console.log(data);
 				setIsLoading(false);
 				setList(
 					data.items.map(item => [
-						item.volumeInfo?.imageLinks?.smallThumbnail,
+						item.volumeInfo?.imageLinks?.smallThumbnail
+							? `https${item.volumeInfo?.imageLinks?.smallThumbnail.slice(4)}`
+							: '',
 						item.volumeInfo?.title,
 						item.volumeInfo?.authors,
 						item.volumeInfo?.categories?.[0],
