@@ -40,8 +40,12 @@ function Container() {
 
 	return (
 		<Box sx={{ width: '1200px' }}>
-			<Form onSubmit={value => setSearch(value)} isLoading={isLoading}></Form>
-			<List lists={list}></List>
+			<Form
+				data-testId="form-container"
+				onSubmit={value => setSearch(value)}
+				isLoading={isLoading}
+			></Form>
+			<List data-testId="list-container" lists={list}></List>
 		</Box>
 	);
 }
