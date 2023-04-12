@@ -1,11 +1,23 @@
 import React from 'react';
-import Tooltip from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
+
+const CustomWidthTooltip = styled(({ className, ...props }: TooltipProps) => (
+	<Tooltip {...props} classes={{ popper: className }} />
+))({
+	[`& .${tooltipClasses.tooltip}`]: {
+		maxWidth: 600,
+		backgroundColor: 'rgba(0, 0, 0, 0.87)',
+		color: 'white',
+		fontSize: '20px'
+	}
+});
 
 const ArrowTooltip = ({ content, children }) => {
 	return (
-		<Tooltip title={content} arrow>
+		<CustomWidthTooltip title={content} placement="bottom-end">
 			{children}
-		</Tooltip>
+		</CustomWidthTooltip>
 	);
 };
 
