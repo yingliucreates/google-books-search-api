@@ -17,27 +17,6 @@ const Form = ({ onSubmit, isLoading }) => {
 	// 	};
 	// };
 
-	// const throttle = (func, limit) => {
-	// 	let lastFunc;
-	// 	let lastRan;
-	// 	return function () {
-	// 		const context = this;
-	// 		const args = arguments;
-	// 		if (!lastRan) {
-	// 			func.apply(context, args);
-	// 			lastRan = Date.now();
-	// 		} else {
-	// 			clearTimeout(lastFunc);
-	// 			lastFunc = setTimeout(() => {
-	// 				if (Date.now() - lastRan >= limit) {
-	// 					func.apply(context, args);
-	// 					lastRan = Date.now();
-	// 				}
-	// 			}, limit - (Date.now() - lastRan));
-	// 		}
-	// 	};
-	// };
-
 	const handleSubmit = e => {
 		e.preventDefault();
 		onSubmit(value);
@@ -57,7 +36,7 @@ const Form = ({ onSubmit, isLoading }) => {
 				<TextField
 					id="standard-basic"
 					data-testid="text-input"
-					label="Type your query and..."
+					label="Type away and..."
 					variant="standard"
 					size="small"
 					sx={{
