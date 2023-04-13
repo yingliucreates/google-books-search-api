@@ -16,7 +16,7 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { ImageListItem } from '@mui/material';
-import ArrowTooltip from './tooltip';
+import BoxTooltip from './tooltip';
 
 function TablePaginationActions({ count, page, rowsPerPage, onPageChange }) {
 	const theme = useTheme();
@@ -157,7 +157,7 @@ const List = ({ lists }) => {
 						? lists.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 						: lists
 					).map((list, i) => (
-						<ArrowTooltip key={`tooltip${i}`} content={list[6]}>
+						<BoxTooltip key={`tooltip${i}`} content={list[6]}>
 							<TableRow hover key={`tableRow${i}`} component={Paper}>
 								<TableCell component="th" scope="row" style={{ width: '10%' }}>
 									<ImageListItem
@@ -188,7 +188,7 @@ const List = ({ lists }) => {
 									{list[5]}
 								</TableCell>
 							</TableRow>
-						</ArrowTooltip>
+						</BoxTooltip>
 					))}
 					{emptyRows > 0 && (
 						<TableRow hover style={{ height: 53 * emptyRows }}>

@@ -13,7 +13,7 @@ const CustomWidthTooltip = styled(({ className, ...props }: TooltipProps) => (
 	}
 });
 
-const ArrowTooltip = ({ content, children }) => {
+const BoxTooltip = ({ content, children }) => {
 	return (
 		<CustomWidthTooltip title={content} placement="bottom-end">
 			{children}
@@ -21,4 +21,4 @@ const ArrowTooltip = ({ content, children }) => {
 	);
 };
 
-export default ArrowTooltip;
+export default BoxTooltip;
